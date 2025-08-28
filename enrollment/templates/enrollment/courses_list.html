@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+{% for obj in page_obj %}
+Название: {{ obj.name }} <br>
+{{ obj.start_date }} - {{ obj.end_date }}
+<br>
+Кол-во лекций: {{ obj.lectures_count }}
+<br>
+<br>
+{% endfor %}
+
+<div align="center">
+    {% if page_obj.has_previous %}
+    <a href="?page={{ page_obj.previous_page_number }}"> {{ page_obj.number|add:-1 }}
+    </a>
+    {% endif %}
+    {{ page_obj.number }}
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}"> {{ page_obj.number|add:1 }}</a>
+    {% endif %}
+</div>
+
+
+</body>
+</html>
