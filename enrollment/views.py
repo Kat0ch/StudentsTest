@@ -9,11 +9,10 @@ from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework.pagination import PageNumberPagination
 from .serializers import CourseSerializer, StudentSerializer
+from django.utils.decorators import method_decorator
 
 
-
-
-@cache_page(60 * 5)
+@method_decorator(cache_page(5 * 60), name='dispatch')
 class CoursesStats(APIView):
     def get(self, request):
         average_students = \
@@ -33,7 +32,7 @@ class CoursesStats(APIView):
         return Response(data)
 
 
-@cache_page(2 * 60)
+@method_decorator(cache_page(2 * 60), name='dispatch')
 class CoursesList(ListView):
     paginate_by = 10
     template_name = 'enrollment/courses_list.html'
