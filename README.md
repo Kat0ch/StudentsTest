@@ -2,10 +2,12 @@
 
 ## Начало работы с приложением
 
-### 1. Переход в директорию Students
 
-``` bash
-cd Students
+### 1. Создание и активация Виртуального окружения (При необходимости)
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
 ```
 
 ### 2. Установка зависимостей
@@ -29,6 +31,7 @@ DB_PORT=5432
 # Ключ для Хеширования пароля
 SECRET_KEY=UNIQUE_RANDOM_STRING_OF_AT_LEAST_50_CHARACTERS
 ```
+
 
 ### 4. Миграция таблиц в базу данных
 

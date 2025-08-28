@@ -79,7 +79,6 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
     ),
 }
-
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
