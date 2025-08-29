@@ -12,7 +12,7 @@ source venv/bin/activate
 
 ### 2. Установка зависимостей
 
-```commandline
+```bash
 pip install -r requirements.txt
 ```
 
@@ -20,7 +20,7 @@ pip install -r requirements.txt
 
 **Пример** содержания файла *.env*
 
-```bash
+```
 # Настройка Базы данных
 DB_NAME=TestStud
 DB_USER=postgres
