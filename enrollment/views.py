@@ -1,5 +1,7 @@
 from django.db.models import Avg, Count, Max, Sum
-from django.views.generic import ListView, CreateView
+from django.shortcuts import render
+from django.views import View
+from django.views.generic import ListView, CreateView, FormView
 from rest_framework.generics import RetrieveUpdateDestroyAPIView
 from rest_framework.views import APIView
 from .forms import *
@@ -10,6 +12,7 @@ from rest_framework import generics
 from rest_framework.pagination import PageNumberPagination
 from .serializers import CourseSerializer, StudentSerializer
 from django.utils.decorators import method_decorator
+from .tasks import *
 
 
 @method_decorator(cache_page(5 * 60), name='dispatch')
@@ -53,3 +56,21 @@ class StudentsList(ListView):
 class StudentsRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
+
+
+@method_decorator(cache_page(1 * 60), name='dispatch')
+class SendMessage(View):
+    def get(self, request):
+        form = MailForm()
+        return render(request, 'enrollment/forms_template.html',
+                      {'form': form, 'button': 'Отправить'})
+
+    def post(self, request):
+        form = MailForm(request.POST)
+        if form.is_valid():
+            recipient_mail = form.cleaned_data.get('email')
+            send_message(recipient_mail)
+            return render(request, 'enrollment/courses_list.html')
+
+        return render(request, 'enrollment/forms_template.html',
+                      {'form': form, 'button': 'Отправить'})

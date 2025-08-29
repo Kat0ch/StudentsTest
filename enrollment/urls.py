@@ -9,4 +9,6 @@ urlpatterns = [
 
     path('students/', StudentsList.as_view(), name='students_list'),
     path('students/<int:pk>/', StudentsRetrieveUpdateDestroy.as_view(), name='student'),
+
+    path('send_message/', SendMessage.as_view(), name='send_message'),
 ]
