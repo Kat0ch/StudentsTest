@@ -44,3 +44,6 @@ docker-compose up --build
     - **birth_day**: Дата рождения студента
 
 - **DELETE** /students/id/ - Удаляет студента
+
+
+- **GET** /send_message/ - Форма для отправки сообщения на почту
