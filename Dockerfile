@@ -7,12 +7,9 @@ COPY ./requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
-ENV DB_NAME=
-ENV DB_USER=
-ENV DB_PASSWORD=
-ENV DB_HOST=
-ENV DB_PORT=
-ENV SECRET_KEY=
+
+EXPOSE 8000
+
 
 
 EXPOSE 8000

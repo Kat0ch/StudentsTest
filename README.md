@@ -9,51 +9,14 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 
-### 2. Установка зависимостей
+### 2. Настройка переменных окружения (.env)
+
+На основе файла ".env.example" создайте свой ".env" файл
+
+### 3. Запуск контейнера
 
 ```bash
-pip install -r requirements.txt
-```
-
-### 3. Настройка переменных окружения (.env)
-
-**Пример** содержания файла *.env*
-
-```
-# Настройка Базы данных
-DB_NAME=TestStud
-DB_USER=postgres
-DB_PASSWORD=password
-DB_HOST=localhost
-DB_PORT=5432
-
-# Подключение Redis
-REDIS_LOCATION=redis://:your_password_here@localhost
-
-
-# Настройка электронной почты для отправки сообщений
-EMAIL_HOST=smtp.yourprovider.com
-EMAIL_PORT=587
-EMAIL_USE_TLS=True
-EMAIL_HOST_USER=youremail@example.com
-EMAIL_HOST_PASSWORD=yourpassword
-DEFAULT_FROM_EMAIL=youremail@example.com
-
-
-# Ключ для Хеширования пароля
-SECRET_KEY=UNIQUE_RANDOM_STRING_OF_AT_LEAST_50_CHARACTERS
-```
-
-### 4. Миграция таблиц в базу данных
-
-```bash
-python manage.py migrate
-```
-
-### 5. Запуск приложения
-
-```bash
-python manage.py runserver
+docker-compose up --build
 ```
 
 ## Использование приложения (Эндпоинты)

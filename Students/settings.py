@@ -33,8 +33,8 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
-CELERY_BROKER_URL = os.getenv('REDIS_LOCATION')
-CELERY_RESULT_BACKEND = os.getenv('REDIS_LOCATION')
+CELERY_BROKER_URL = os.getenv('REDIS_URL')
+CELERY_RESULT_BACKEND = os.getenv('REDIS_URL')
 
 # Application definition
 
@@ -101,10 +101,10 @@ WSGI_APPLICATION = 'Students.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME'),
+        'NAME': os.getenv('POSTGRES_NAME'),
         'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+        'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
         'PORT': os.getenv('DB_PORT', ''),
     }
 }
