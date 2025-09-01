@@ -51,3 +51,9 @@ class SendMessageSerializer(serializers.Serializer):
     recipient: serializers.EmailField = serializers.EmailField()
     subject: serializers.CharField = serializers.CharField(max_length=50)
     message: serializers.CharField = serializers.CharField()
+
+
+class CoursesStatsSerializer(serializers.Serializer):
+    average_students = serializers.FloatField()
+    most_popular_course = serializers.CharField()
+    total_lectures_count = serializers.IntegerField()

@@ -5,7 +5,7 @@ from rest_framework.status import HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
 from .models import *
 from rest_framework.response import Response
-from .serializers import CourseSerializer, StudentSerializer, SendMessageSerializer
+from .serializers import CourseSerializer, StudentSerializer, SendMessageSerializer, CoursesStatsSerializer
 from django.utils.decorators import method_decorator
 from .services import CustomLimitOffsetPagination
 from .tasks import send_message
@@ -27,8 +27,9 @@ class CoursesStats(APIView):
             'most_popular_course': CourseSerializer(most_popular_course).data if most_popular_course else None,
             'total_lectures_count': total_lectures_count or 0
         }
+        serializer = CoursesStatsSerializer(data=data)
 
-        return Response(data)
+        return Response(serializer.data)
 
 
 @method_decorator(cache_page(2 * 60), name='dispatch')
