@@ -1,6 +1,7 @@
 from django.db.models import Avg, Count, Sum, QuerySet
 from rest_framework.request import Request
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
+from rest_framework.status import HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
 from .models import *
 from rest_framework.response import Response
@@ -65,3 +66,4 @@ class SendMessage(APIView):
 
             send_message(recipient, subject, message)
             return Response(serializer.data)
+        return Response({'Error': 'Invalid input data'}, status=HTTP_400_BAD_REQUEST)
