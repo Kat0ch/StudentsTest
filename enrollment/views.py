@@ -3,11 +3,14 @@ from rest_framework.request import Request
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
 from rest_framework.status import HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
+# FIXME: не используй относительные импорты
+# FIXME: не используй wildcard импорты (import *), всегда перечисляй то, что используешь
 from .models import *
 from rest_framework.response import Response
 from .serializers import CourseSerializer, StudentSerializer, SendMessageSerializer, CoursesStatsSerializer
 from django.utils.decorators import method_decorator
 from .services import CustomLimitOffsetPagination
+# FIXME: не используй относительные импорты
 from .tasks import send_message
 from django.views.decorators.cache import cache_page
 
