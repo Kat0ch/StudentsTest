@@ -12,6 +12,7 @@ from .tasks import send_message
 from django.views.decorators.cache import cache_page
 
 
+# FIXME: кеш лучше вешать не на классы, а на методы
 @method_decorator(cache_page(5 * 60), name='dispatch')
 class CoursesStats(APIView):
     def get(self):
@@ -32,6 +33,7 @@ class CoursesStats(APIView):
         return Response(serializer.data)
 
 
+# FIXME: кеш лучше вешать не на классы, а на методы (тут у тебя POST тоже кешируется, что неправильно)
 @method_decorator(cache_page(2 * 60), name='dispatch')
 class CoursesList(ListCreateAPIView):
     serializer_class: CourseSerializer = CourseSerializer
@@ -44,6 +46,7 @@ class CourseRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     serializer_class: CourseSerializer = CourseSerializer
 
 
+# FIXME: кеш лучше вешать не на классы, а на методы (тут у тебя POST тоже кешируется, что неправильно)
 @method_decorator(cache_page(2 * 60), name='dispatch')
 class StudentsList(ListCreateAPIView):
     serializer_class: StudentSerializer = StudentSerializer
@@ -51,11 +54,13 @@ class StudentsList(ListCreateAPIView):
     pagination_class: CustomLimitOffsetPagination = CustomLimitOffsetPagination
 
 
+# TODO: можешь дополнительно почитать про viewset's
 class StudentsRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     queryset: QuerySet = Student.objects.all()
     serializer_class: StudentSerializer = StudentSerializer
 
 
+# FIXME: кеш лучше вешать не на классы, а на методы
 @method_decorator(cache_page(1 * 60), name='dispatch')
 class SendMessage(APIView):
     def post(self, request: Request):

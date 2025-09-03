@@ -28,6 +28,9 @@ class Student(models.Model):
 
 
 class Enrollment(models.Model):
+    # FIXME: student_id и course_id - плохое название для полей.
+    #  должно быть student и course, а student_id и course_id джанга генерит сама и там будет int (PK из Student и Course)
+    #  а student - это объект Student
     student_id: models.ForeignKey = models.ForeignKey(Student, on_delete=models.CASCADE, verbose_name='Студент',
                                                       related_name='enrolled_student')
     course_id: models.ForeignKey = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='Курс',
