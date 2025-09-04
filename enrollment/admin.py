@@ -14,6 +14,8 @@ class EnrollmentAdmin(admin.ModelAdmin):
     pass
 
 
+# FIXME: регать лучше декораторами, так код не размазывается по всеми файлу,
+#  т.к. этих админок может быть 50+ в одном файле, не хочется за ними тут ползать везде
 admin.site.register(Course, CourseAdmin)
 admin.site.register(Student, StudentAdmin)
 admin.site.register(Enrollment, EnrollmentAdmin)

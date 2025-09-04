@@ -28,6 +28,11 @@ class CourseSerializer(serializers.ModelSerializer):
         model: Course = Course
         fields: list = ['id', 'name', 'start_date', 'end_date', 'lectures_count', 'students_list']
 
+    # FIXME: запросы внутри сериализаторов - плохо
+    #  данные надо подготавливать во вьюхах и передавать в сериализатор.
+    #  Сериализаторы используются только для сериализации-десериализации данных
+    #  Запросы и логика должны быть в сервисах. Т.е. весь путь - сервис -> view -> сериализатор
+    #  В StudentSerializer аналогично
     def get_students_list(self, obj):
         students: QuerySet = Student.objects.filter(enrolled_student__in=obj.enrolled_course.all()).distinct()
         return StudentToStudentSerializer(students, many=True).data

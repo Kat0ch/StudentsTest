@@ -3,15 +3,19 @@ from rest_framework.request import Request
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, ListCreateAPIView
 from rest_framework.status import HTTP_400_BAD_REQUEST
 from rest_framework.views import APIView
+# FIXME: не используй относительные импорты
+# FIXME: не используй wildcard импорты (import *), всегда перечисляй то, что используешь
 from .models import *
 from rest_framework.response import Response
 from .serializers import CourseSerializer, StudentSerializer, SendMessageSerializer, CoursesStatsSerializer
 from django.utils.decorators import method_decorator
 from .services import CustomLimitOffsetPagination
+# FIXME: не используй относительные импорты
 from .tasks import send_message
 from django.views.decorators.cache import cache_page
 
 
+# FIXME: кеш лучше вешать не на классы, а на методы
 @method_decorator(cache_page(5 * 60), name='dispatch')
 class CoursesStats(APIView):
     def get(self):
@@ -32,6 +36,7 @@ class CoursesStats(APIView):
         return Response(serializer.data)
 
 
+# FIXME: кеш лучше вешать не на классы, а на методы (тут у тебя POST тоже кешируется, что неправильно)
 @method_decorator(cache_page(2 * 60), name='dispatch')
 class CoursesList(ListCreateAPIView):
     serializer_class: CourseSerializer = CourseSerializer
@@ -44,6 +49,7 @@ class CourseRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     serializer_class: CourseSerializer = CourseSerializer
 
 
+# FIXME: кеш лучше вешать не на классы, а на методы (тут у тебя POST тоже кешируется, что неправильно)
 @method_decorator(cache_page(2 * 60), name='dispatch')
 class StudentsList(ListCreateAPIView):
     serializer_class: StudentSerializer = StudentSerializer
@@ -51,11 +57,13 @@ class StudentsList(ListCreateAPIView):
     pagination_class: CustomLimitOffsetPagination = CustomLimitOffsetPagination
 
 
+# TODO: можешь дополнительно почитать про viewset's
 class StudentsRetrieveUpdateDestroy(RetrieveUpdateDestroyAPIView):
     queryset: QuerySet = Student.objects.all()
     serializer_class: StudentSerializer = StudentSerializer
 
 
+# FIXME: кеш лучше вешать не на классы, а на методы
 @method_decorator(cache_page(1 * 60), name='dispatch')
 class SendMessage(APIView):
     def post(self, request: Request):
